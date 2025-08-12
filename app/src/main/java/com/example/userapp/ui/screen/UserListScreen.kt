@@ -12,6 +12,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,7 +25,12 @@ import com.example.userapp.viewmodel.UserViewModel
 
 @Composable
 fun UserListScreen(viewModel: UserViewModel, navController: NavHostController) {
+
     val users by viewModel.users.collectAsState()
+
+    /*LaunchedEffect(Unit) {
+        viewModel.loadUsers()
+    }*/
 
     var name: String by remember { mutableStateOf("") }
     var email: String by remember { mutableStateOf("") }
@@ -46,7 +52,7 @@ fun UserListScreen(viewModel: UserViewModel, navController: NavHostController) {
         Spacer(Modifier.padding(16.dp))
 
         Button(onClick = {
-
+            viewModel.addUser(name, email)
             name = ""
             email = ""
         }) {

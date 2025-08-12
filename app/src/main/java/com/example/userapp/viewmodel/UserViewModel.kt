@@ -32,7 +32,7 @@ class UserViewModel(
 
     fun addUser(name: String, email: String) {
         viewModelScope.launch {
-            val newUser = User(id = 0, name = name, email = email)
+            val newUser = User(name = name, email = email)
             repository.createUser(newUser)
             loadUsers()
         }
